@@ -15,6 +15,22 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@swizzy-industries/authenticator": [
+        "Libs/Swizzy Industries/Authenticator/src/index.ts"
+      ],
+      "@swizzy-industries/homepage": [
+        "Libs/Swizzy Industries/Homepage/src/index.ts"
+      ],
+      "@swizzy-industries/landing": [
+        "Libs/Swizzy Industries/Landing/src/index.ts"
+      ],
+      "@swizzy-industries/login": ["Libs/Swizzy Industries/Login/src/index.ts"],
+      "@swizzy-industries/register": [
+        "Libs/Swizzy Industries/Register/src/index.ts"
+      ],
+      "@swizzy-industries/verify-email": [
+        "Libs/Swizzy Industries/Verify_Email/src/index.ts"
+      ],
       "Authenticator/Routes": [
         "Federations/Swizzy Industries/Authenticator/Authenticator/src/app/remote-entry/entry.routes.ts"
       ],
