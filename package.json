@@ -2,7 +2,9 @@
   "name": "@swizzy-industries-frontend/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "swizzy": "nx run Swizzy_Industries_Host:serve:development --watch=true"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~18.0.0",

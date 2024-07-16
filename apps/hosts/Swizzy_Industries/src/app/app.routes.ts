@@ -1,18 +1,7 @@
-import { NxWelcomeComponent } from './nx-welcome.component';
 import { Route } from '@angular/router';
 import { loadRemoteModule } from '@nx/angular/mf';
 
 export const appRoutes: Route[] = [
-  {
-    path: 'Homepage',
-    loadChildren: () =>
-      loadRemoteModule('Homepage', './Routes').then((m) => m.remoteRoutes),
-  },
-  {
-    path: 'Landing',
-    loadChildren: () =>
-      loadRemoteModule('Landing', './Routes').then((m) => m.remoteRoutes),
-  },
   {
     path: 'Verify_Email',
     loadChildren: () =>
@@ -34,7 +23,13 @@ export const appRoutes: Route[] = [
       loadRemoteModule('Register', './Routes').then((m) => m.remoteRoutes),
   },
   {
+    path: 'Homepage',
+    loadChildren: () =>
+      loadRemoteModule('Homepage', './Routes').then((m) => m.remoteRoutes),
+  },
+  {
     path: '',
-    component: NxWelcomeComponent,
+    loadChildren: () =>
+      loadRemoteModule('Landing', './Routes').then((m) => m.remoteRoutes),
   },
 ];
