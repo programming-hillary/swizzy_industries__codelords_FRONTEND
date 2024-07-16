@@ -1,0 +1,148 @@
+{
+  "name": "Swizzy_Industries_Host",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/hosts/Swizzy_Industries/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/hosts/Swizzy_Industries/browser",
+        "index": "apps/hosts/Swizzy_Industries/src/index.html",
+        "main": "apps/hosts/Swizzy_Industries/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/hosts/Swizzy_Industries/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/hosts/Swizzy_Industries/public"
+          }
+        ],
+        "styles": ["apps/hosts/Swizzy_Industries/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/hosts/Swizzy_Industries/webpack.config.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/angular:module-federation-dev-server",
+      "options": {
+        "port": 4200,
+        "publicHost": "http://localhost:4200"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "Swizzy_Industries_Host:build:production"
+        },
+        "development": {
+          "buildTarget": "Swizzy_Industries_Host:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "Swizzy_Industries_Host:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/hosts/Swizzy_Industries/jest.config.ts"
+      }
+    },
+    "server": {
+      "dependsOn": ["build"],
+      "executor": "@nx/angular:webpack-server",
+      "options": {
+        "outputPath": "dist/apps/hosts/Swizzy_Industries/server",
+        "main": "apps/hosts/Swizzy_Industries/server.ts",
+        "tsConfig": "apps/hosts/Swizzy_Industries/tsconfig.server.json",
+        "inlineStyleLanguage": "scss",
+        "customWebpackConfig": {
+          "path": "apps/hosts/Swizzy_Industries/webpack.server.config.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "media"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false,
+          "vendorChunk": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-ssr": {
+      "executor": "@nx/angular:module-federation-dev-ssr",
+      "configurations": {
+        "development": {
+          "browserTarget": "Swizzy_Industries_Host:build:development",
+          "serverTarget": "Swizzy_Industries_Host:server:development"
+        },
+        "production": {
+          "browserTarget": "Swizzy_Industries_Host:build:production",
+          "serverTarget": "Swizzy_Industries_Host:server:production"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "prerender": {
+      "executor": "@angular-devkit/build-angular:prerender",
+      "options": {
+        "routes": ["/"]
+      },
+      "configurations": {
+        "development": {
+          "browserTarget": "Swizzy_Industries_Host:build:development",
+          "serverTarget": "Swizzy_Industries_Host:server:development"
+        },
+        "production": {
+          "browserTarget": "Swizzy_Industries_Host:build:production",
+          "serverTarget": "Swizzy_Industries_Host:server:production"
+        }
+      },
+      "defaultConfiguration": "production"
+    }
+  }
+}
