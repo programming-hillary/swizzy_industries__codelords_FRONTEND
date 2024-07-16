@@ -1,0 +1,178 @@
+{
+  "name": "Login",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "Federations/Swizzy Industries/Login/Login/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/Federations/Swizzy Industries/Login/Login/browser",
+        "index": "Federations/Swizzy Industries/Login/Login/src/index.html",
+        "main": "Federations/Swizzy Industries/Login/Login/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "Federations/Swizzy Industries/Login/Login/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "Federations/Swizzy Industries/Login/Login/public"
+          }
+        ],
+        "styles": ["Federations/Swizzy Industries/Login/Login/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "Federations/Swizzy Industries/Login/Login/webpack.config.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "Federations/Swizzy Industries/Login/Login/webpack.prod.config.ts"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/angular:dev-server",
+      "options": {
+        "port": 4202,
+        "publicHost": "http://localhost:4202"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "Login:build:production"
+        },
+        "development": {
+          "buildTarget": "Login:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "Login:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "Federations/Swizzy Industries/Login/Login/jest.config.ts"
+      }
+    },
+    "server": {
+      "dependsOn": ["build"],
+      "executor": "@nx/angular:webpack-server",
+      "options": {
+        "outputPath": "dist/Federations/Swizzy Industries/Login/Login/server",
+        "main": "Federations/Swizzy Industries/Login/Login/server.ts",
+        "tsConfig": "Federations/Swizzy Industries/Login/Login/tsconfig.server.json",
+        "inlineStyleLanguage": "scss",
+        "customWebpackConfig": {
+          "path": "Federations/Swizzy Industries/Login/Login/webpack.server.config.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "media"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false,
+          "vendorChunk": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-ssr": {
+      "executor": "@angular-devkit/build-angular:ssr-dev-server",
+      "configurations": {
+        "development": {
+          "browserTarget": "Login:build:development",
+          "serverTarget": "Login:server:development"
+        },
+        "production": {
+          "browserTarget": "Login:build:production",
+          "serverTarget": "Login:server:production"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4202
+      }
+    },
+    "prerender": {
+      "executor": "@angular-devkit/build-angular:prerender",
+      "options": {
+        "routes": ["/"]
+      },
+      "configurations": {
+        "development": {
+          "browserTarget": "Login:build:development",
+          "serverTarget": "Login:server:development"
+        },
+        "production": {
+          "browserTarget": "Login:build:production",
+          "serverTarget": "Login:server:production"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "defaultConfiguration": "production",
+      "options": {
+        "buildTarget": "Login:build",
+        "port": 4202,
+        "watch": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "Login:build:development"
+        },
+        "production": {
+          "buildTarget": "Login:build:production"
+        }
+      }
+    },
+    "static-server": {
+      "dependsOn": ["build", "server"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "PORT=4202 node dist/Federations/Swizzy Industries/Login/Login/server/main.js"
+      }
+    }
+  }
+}

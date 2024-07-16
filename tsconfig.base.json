@@ -14,7 +14,26 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "Authenticator/Routes": [
+        "Federations/Swizzy Industries/Authenticator/Authenticator/src/app/remote-entry/entry.routes.ts"
+      ],
+      "Homepage/Routes": [
+        "Federations/Swizzy Industries/Homepage/Homepage/src/app/remote-entry/entry.routes.ts"
+      ],
+      "Landing/Routes": [
+        "Federations/Swizzy Industries/Landing/Landing/src/app/remote-entry/entry.routes.ts"
+      ],
+      "Login/Routes": [
+        "Federations/Swizzy Industries/Login/Login/src/app/remote-entry/entry.routes.ts"
+      ],
+      "Register/Routes": [
+        "Federations/Swizzy Industries/Register/Register/src/app/remote-entry/entry.routes.ts"
+      ],
+      "Verify_Email/Routes": [
+        "Federations/Swizzy Industries/Verify_Email/Verify_Email/src/app/remote-entry/entry.routes.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

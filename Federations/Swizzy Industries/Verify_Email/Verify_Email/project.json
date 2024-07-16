@@ -1,0 +1,180 @@
+{
+  "name": "Verify_Email",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "Federations/Swizzy Industries/Verify_Email/Verify_Email/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/Federations/Swizzy Industries/Verify_Email/Verify_Email/browser",
+        "index": "Federations/Swizzy Industries/Verify_Email/Verify_Email/src/index.html",
+        "main": "Federations/Swizzy Industries/Verify_Email/Verify_Email/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "Federations/Swizzy Industries/Verify_Email/Verify_Email/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "Federations/Swizzy Industries/Verify_Email/Verify_Email/public"
+          }
+        ],
+        "styles": [
+          "Federations/Swizzy Industries/Verify_Email/Verify_Email/src/styles.scss"
+        ],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "Federations/Swizzy Industries/Verify_Email/Verify_Email/webpack.config.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "Federations/Swizzy Industries/Verify_Email/Verify_Email/webpack.prod.config.ts"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/angular:dev-server",
+      "options": {
+        "port": 4204,
+        "publicHost": "http://localhost:4204"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "Verify_Email:build:production"
+        },
+        "development": {
+          "buildTarget": "Verify_Email:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "Verify_Email:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "Federations/Swizzy Industries/Verify_Email/Verify_Email/jest.config.ts"
+      }
+    },
+    "server": {
+      "dependsOn": ["build"],
+      "executor": "@nx/angular:webpack-server",
+      "options": {
+        "outputPath": "dist/Federations/Swizzy Industries/Verify_Email/Verify_Email/server",
+        "main": "Federations/Swizzy Industries/Verify_Email/Verify_Email/server.ts",
+        "tsConfig": "Federations/Swizzy Industries/Verify_Email/Verify_Email/tsconfig.server.json",
+        "inlineStyleLanguage": "scss",
+        "customWebpackConfig": {
+          "path": "Federations/Swizzy Industries/Verify_Email/Verify_Email/webpack.server.config.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "media"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false,
+          "vendorChunk": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-ssr": {
+      "executor": "@angular-devkit/build-angular:ssr-dev-server",
+      "configurations": {
+        "development": {
+          "browserTarget": "Verify_Email:build:development",
+          "serverTarget": "Verify_Email:server:development"
+        },
+        "production": {
+          "browserTarget": "Verify_Email:build:production",
+          "serverTarget": "Verify_Email:server:production"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4204
+      }
+    },
+    "prerender": {
+      "executor": "@angular-devkit/build-angular:prerender",
+      "options": {
+        "routes": ["/"]
+      },
+      "configurations": {
+        "development": {
+          "browserTarget": "Verify_Email:build:development",
+          "serverTarget": "Verify_Email:server:development"
+        },
+        "production": {
+          "browserTarget": "Verify_Email:build:production",
+          "serverTarget": "Verify_Email:server:production"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "defaultConfiguration": "production",
+      "options": {
+        "buildTarget": "Verify_Email:build",
+        "port": 4204,
+        "watch": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "Verify_Email:build:development"
+        },
+        "production": {
+          "buildTarget": "Verify_Email:build:production"
+        }
+      }
+    },
+    "static-server": {
+      "dependsOn": ["build", "server"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "PORT=4204 node dist/Federations/Swizzy Industries/Verify_Email/Verify_Email/server/main.js"
+      }
+    }
+  }
+}

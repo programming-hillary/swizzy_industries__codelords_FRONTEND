@@ -1,0 +1,9 @@
+{
+  "name": "Authenticator-e2e",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "Federations/Swizzy Industries/Authenticator/Authenticator-e2e/src",
+  "implicitDependencies": ["Authenticator"],
+  "// targets": "to see all targets run: nx show project Authenticator-e2e --web",
+  "targets": {}
+}

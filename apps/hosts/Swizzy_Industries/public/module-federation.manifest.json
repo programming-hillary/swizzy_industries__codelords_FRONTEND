@@ -1,1 +1,8 @@
-{}
+{
+  "Register": "http://localhost:4201",
+  "Login": "http://localhost:4202",
+  "Authenticator": "http://localhost:4203",
+  "Verify_Email": "http://localhost:4204",
+  "Landing": "http://localhost:4205",
+  "Homepage": "http://localhost:4206"
+}

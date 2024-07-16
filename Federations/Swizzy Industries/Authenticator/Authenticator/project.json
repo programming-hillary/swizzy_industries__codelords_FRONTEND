@@ -1,0 +1,180 @@
+{
+  "name": "Authenticator",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "Federations/Swizzy Industries/Authenticator/Authenticator/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/Federations/Swizzy Industries/Authenticator/Authenticator/browser",
+        "index": "Federations/Swizzy Industries/Authenticator/Authenticator/src/index.html",
+        "main": "Federations/Swizzy Industries/Authenticator/Authenticator/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "Federations/Swizzy Industries/Authenticator/Authenticator/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "Federations/Swizzy Industries/Authenticator/Authenticator/public"
+          }
+        ],
+        "styles": [
+          "Federations/Swizzy Industries/Authenticator/Authenticator/src/styles.scss"
+        ],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "Federations/Swizzy Industries/Authenticator/Authenticator/webpack.config.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "Federations/Swizzy Industries/Authenticator/Authenticator/webpack.prod.config.ts"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/angular:dev-server",
+      "options": {
+        "port": 4203,
+        "publicHost": "http://localhost:4203"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "Authenticator:build:production"
+        },
+        "development": {
+          "buildTarget": "Authenticator:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "Authenticator:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "Federations/Swizzy Industries/Authenticator/Authenticator/jest.config.ts"
+      }
+    },
+    "server": {
+      "dependsOn": ["build"],
+      "executor": "@nx/angular:webpack-server",
+      "options": {
+        "outputPath": "dist/Federations/Swizzy Industries/Authenticator/Authenticator/server",
+        "main": "Federations/Swizzy Industries/Authenticator/Authenticator/server.ts",
+        "tsConfig": "Federations/Swizzy Industries/Authenticator/Authenticator/tsconfig.server.json",
+        "inlineStyleLanguage": "scss",
+        "customWebpackConfig": {
+          "path": "Federations/Swizzy Industries/Authenticator/Authenticator/webpack.server.config.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "media"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false,
+          "vendorChunk": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-ssr": {
+      "executor": "@angular-devkit/build-angular:ssr-dev-server",
+      "configurations": {
+        "development": {
+          "browserTarget": "Authenticator:build:development",
+          "serverTarget": "Authenticator:server:development"
+        },
+        "production": {
+          "browserTarget": "Authenticator:build:production",
+          "serverTarget": "Authenticator:server:production"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4203
+      }
+    },
+    "prerender": {
+      "executor": "@angular-devkit/build-angular:prerender",
+      "options": {
+        "routes": ["/"]
+      },
+      "configurations": {
+        "development": {
+          "browserTarget": "Authenticator:build:development",
+          "serverTarget": "Authenticator:server:development"
+        },
+        "production": {
+          "browserTarget": "Authenticator:build:production",
+          "serverTarget": "Authenticator:server:production"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "defaultConfiguration": "production",
+      "options": {
+        "buildTarget": "Authenticator:build",
+        "port": 4203,
+        "watch": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "Authenticator:build:development"
+        },
+        "production": {
+          "buildTarget": "Authenticator:build:production"
+        }
+      }
+    },
+    "static-server": {
+      "dependsOn": ["build", "server"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "PORT=4203 node dist/Federations/Swizzy Industries/Authenticator/Authenticator/server/main.js"
+      }
+    }
+  }
+}

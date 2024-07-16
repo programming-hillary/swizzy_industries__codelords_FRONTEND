@@ -1,0 +1,9 @@
+{
+  "name": "Verify_Email-e2e",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "Federations/Swizzy Industries/Verify_Email/Verify_Email-e2e/src",
+  "implicitDependencies": ["Verify_Email"],
+  "// targets": "to see all targets run: nx show project Verify_Email-e2e --web",
+  "targets": {}
+}
